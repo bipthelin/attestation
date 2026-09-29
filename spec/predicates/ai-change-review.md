@@ -115,7 +115,7 @@ The subject is the head commit the review applies to.
 
 A JSON Schema (2020-12) for the predicate is published with the specification
 as
-[`schemas/review.schema.json`](https://github.com/noru-tech/agent-change-control/blob/v0.5.1/schemas/review.schema.json).
+[`schemas/review.schema.json`](https://github.com/noru-tech/agent-change-control/blob/v0.5.2/schemas/review.schema.json).
 
 ### Parsing Rules
 
@@ -217,10 +217,10 @@ This predicate has no dedicated producer-side corpus yet. What exists:
     outcome. Each vector's expected outcome is written down.
     -   Suite revision 1, published at `v0.5.0`, covers the `operator`,
         `provider` and `identity` dimensions.
-    -   Suite revision 2 adds the opt-in `instructions` dimension. It is on
-        the default branch as of
-        [`d1b836d`](https://github.com/noru-tech/agent-change-control/commit/d1b836dd05b0c9d260e2fc43e0ceba49c03e7850)
-        and ships with the next release.
+    -   Suite revision 2, published at `v0.5.2`, adds the opt-in
+        `instructions` dimension. Its digest list (SHA-256
+        `ffa39c97c2a7247bc1873749c73c620884df1e17c52bb74b0604d70b5c730c52`)
+        is signed at that tag.
 -   The reference consumer,
     [`acc`](https://github.com/noru-tech/agent-change-control), tests:
     -   matching, and unmatched Statements;
