@@ -40,7 +40,10 @@ These predicates were contributed by their authors and follow the
 -   [AI Change Provenance]: Whether a human independent of a software change's
     effective author approved it, where the author may be a coding agent and
     its human operator, with the facts and a re-evaluable verdict.
+-   [AI Change Authorship]: Which coding agent produced a change and which
+    human directed it, bound to the change's head commit.
 
+[AI Change Authorship]: ai-change-authorship.md
 [AI Change Provenance]: ai-change-provenance.md
 [CycloneDX]: https://cyclonedx.org/
 [Link]: link.md
