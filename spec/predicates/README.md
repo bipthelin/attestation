@@ -42,9 +42,13 @@ These predicates were contributed by their authors and follow the
     its human operator, with the facts and a re-evaluable verdict.
 -   [AI Change Authorship]: Which coding agent produced a change and which
     human directed it, bound to the change's head commit.
+-   [AI Change Review]: Who reviewed a change's head and what they decided;
+    for an agent reviewer, the human who directed it and who owns its
+    instructions.
 
 [AI Change Authorship]: ai-change-authorship.md
 [AI Change Provenance]: ai-change-provenance.md
+[AI Change Review]: ai-change-review.md
 [CycloneDX]: https://cyclonedx.org/
 [Link]: link.md
 [New Predicate Guidelines]: ../../docs/new_predicate_guidelines.md
