@@ -209,22 +209,27 @@ qualify.
 
 ## Testing
 
-This predicate has no dedicated conformance corpus yet. What exists:
+This predicate has no dedicated producer-side corpus yet. What exists:
 
 -   The evaluation predicate's conformance corpus exercises the agent-review
     rules. Its vectors carry agent review facts that are signed or only
-    declared, and dependent or unknown on the `operator`, `provider` and
-    `identity` dimensions. Each vector's expected outcome is written down.
-    The opt-in `instructions` dimension has no vector yet.
+    declared, and together they make each of the four dimensions decide an
+    outcome. Each vector's expected outcome is written down.
+    -   Suite revision 1, published at `v0.5.0`, covers the `operator`,
+        `provider` and `identity` dimensions.
+    -   Suite revision 2 adds the opt-in `instructions` dimension. It is on
+        the default branch as of
+        [`d1b836d`](https://github.com/noru-tech/agent-change-control/commit/d1b836dd05b0c9d260e2fc43e0ceba49c03e7850)
+        and ships with the next release.
 -   The reference consumer,
     [`acc`](https://github.com/noru-tech/agent-change-control), tests:
     -   matching, and unmatched Statements;
     -   agreement between the reviewer's kind and the forge account;
+    -   agreement between `reviewer.agent` and a verified account-to-agent
+        mapping;
+    -   the rule that a human reviewer's document names no operator or
+        instructions;
     -   the signer read from a verifier's output.
-
-    It also enforces agreement with account-to-agent mappings, and the rule
-    that a human reviewer's document names no operator. Neither has a
-    dedicated test yet.
 
     Its example Statement is validated against the schema in CI.
 
