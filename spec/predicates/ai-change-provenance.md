@@ -840,6 +840,50 @@ separately, once the naming conventions for this one are settled:
     agent reviewer who operated it and who owns its instructions (specification
     section 3.7).
 
+### Composition with AI code-generation provenance
+
+This section is non-normative.
+
+The OpenFab Generation predicate,
+`https://open-fab.ai/attestation/generation/v0.1`, proposed in
+[in-toto/attestation#604](https://github.com/in-toto/attestation/issues/604),
+records which line ranges inside files a model generated and which a human
+wrote. ACP stops at the change boundary: it says who owned a change and whether
+an independent human approved it, not which lines inside it came from a model.
+When both statements exist for the same change, a verifier can evaluate them
+together, from "who owned this change" down to "which lines came from which
+model".
+
+-   **No shared subject.** ACP subjects are commits (`digest.gitCommit`).
+    Generation subjects and `generated[]` entries are SHA-256 digests of file
+    content. The two statements never share a subject digest, so a verifier
+    cannot join them on the subject alone.
+-   **Joining through the commit tree.** Given an ACP change, a verifier reads
+    each `generated[].path` from the tree of the change's head commit and
+    recomputes the Generation statement's digests from those bytes, as that
+    specification defines them. If every digest matches, the Generation
+    statement describes content of the change ACP attests. Git object
+    identifiers hash a header together with the content and are not the same
+    value, so the verifier hashes the file bytes, not the blob identifier.
+-   **Which commit.** Join against `head_sha`, which the approvals are bound
+    to. The tree of a merge commit can include other changes. A file edited
+    after generation no longer matches, and that is the right result: the
+    Generation statement no longer describes what was approved.
+-   **Finding the statement.** Neither predicate points to the other. ACP 0.3
+    records in `events.attestations` only the authorship and review attestations
+    its collector drew evidence from, and a Generation statement is neither. A
+    verifier obtains both statements from its own attestation store, and the
+    join above establishes that they describe the same content.
+-   **Approvals are counted once.** Generation `signoffs[]` are human
+    cryptographic approvals of the generated artifact. ACP does not count them
+    as reviews, and a Generation verifier does not count ACP reviews as
+    sign-offs. A policy that wants both reads both statements.
+-   **Claimed and observed.** The Generation predicate separates a producer's
+    self-reported acceptance result from a verifier's re-execution of the
+    contract. ACP makes the same split between its embedded findings, which a
+    producer claims, and the findings a consumer obtains by re-evaluating the
+    embedded events under the embedded policy.
+
 ## Changelog and Migrations
 
 -   **0.3.**
